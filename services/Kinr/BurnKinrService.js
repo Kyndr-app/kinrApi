@@ -22,7 +22,6 @@ class BurnKinrService {
     burnFromKinr = async (amount, recipient) => {
         const networkId = await web3.eth.net.getId();
         const MatPoolContract = new web3.eth.Contract(abi, addressKinr[networkId]);
-        //
         const tx = await  MatPoolContract.methods.burn(amount, recipient );
       
         const gas = await tx.estimateGas({ from: address });

@@ -6,7 +6,7 @@ const Razorpay = require("razorpay");
 class DepositUpiService   {
   constructor() {}
 
-  async deposit() {
+  async deposit(amount) {
     try {
       const instance = new Razorpay({
         key_id: process.env.RAZORPAY_KEY_ID,
@@ -14,7 +14,7 @@ class DepositUpiService   {
       });
 
       const options = {
-        amount: 50000, // amount in smallest currency unit
+        amount: amount, // amount in smallest currency unit
         currency: "INR",
         receipt: "receipt_order_74394",
       };
