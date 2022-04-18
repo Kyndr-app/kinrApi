@@ -1,9 +1,9 @@
 const express = require("express");
-const deposit = require("../components/depositUpi/network");
-const withdraw = require("../components/withdrawUpi/network");
-const checkTransaction = require("../components/checkTransactionUpi/network");
+const deposit = require("./deposit");
+const withdraw = require("./withdraw");
+const checkTransaction = require("./checkTransaction");
 
-const supporters = require("../components/supporters/network");
+const supporters = require("./supporters");
 
 const routes = function (server) {
   server.use("/deposit", deposit);

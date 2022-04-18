@@ -5,13 +5,12 @@ class CheckTransactionService {
 
   async checkTransaction(data) {
     try {
-      // getting the details back from our font-end
-      console.log("payment sucess try");
       const {
         orderCreationId,
         razorpayPaymentId,
         razorpayOrderId,
         razorpaySignature,
+        transactionType,
       } = data;
 
       // Creating our own digest
@@ -27,13 +26,13 @@ class CheckTransactionService {
       if (digest !== razorpaySignature)
         return res.status(400).json({ msg: "Transaction not legit!" });
 
-      // THE PAYMENT IS LEGIT & VERIFIED
-      // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
+
 
       return {
         msg: "success",
         orderId: razorpayOrderId,
         paymentId: razorpayPaymentId,
+        transactionType: transactionType,
       };
     } catch (error) {
       return error;

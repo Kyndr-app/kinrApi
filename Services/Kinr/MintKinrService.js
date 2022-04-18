@@ -10,13 +10,13 @@ class MintKinrService {
   constructor() {}
 
   mintKinr = async (amount, recipient) => {
+    console.log("test of address: ", recipient)
     const networkId = await web3.eth.net.getId();
     const KinrCotract = new web3.eth.Contract(
       abi,
       addressKinrArtifac[networkId]
     );
-    console.log(amount)
-    const tx = await KinrCotract.methods.mint(amount , recipient);
+    const tx = await KinrCotract.methods.mint(recipient, amount);
 
     const gas = await tx.estimateGas({ from: address });
 
