@@ -6,7 +6,7 @@ exports.success= function(req, res, message, status) {
 }
 
 exports.error= function(req, res, message, status) {
-    res.status(status || 200).send({
+    res.status(status || 400).send({
         error: message,
         body: ''
     })

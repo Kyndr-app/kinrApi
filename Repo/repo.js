@@ -1,23 +1,32 @@
 class baseRepo {
-  constructor() {}
-
-  create(item) {
-    throw new Error("Method not implemented.");
+  ModelItem;
+  constructor(_ModelItem) {
+    this.ModelItem = _ModelItem;
   }
 
-  update(id, item) {
-    throw new Error("Method not implemented.");  
+  find(itemInfo) {
+    return this.ModelItem.findOne(itemInfo);
+  }
+
+  findOne(itemInfo) {
+    return this.ModelItem.findOne(itemInfo);
+  }
+
+  create(item) {
+    const myItem = new this.ModelItem(item);
+    return myItem.save();
+  }
+
+  update(id, newItem) {
+    console.log(id, newItem);
+    const foundItem = this.ModelItem.findOneAndUpdate(id, newItem, {
+      new: true,
+    });
+    return foundItem;
   }
 
   delete(id) {
-    throw new Error("Method not implemented.");
-  }
-
-  find(item) {
-    throw new Error("Method not implemented.");
-  }
-  findOne(id) {
-    throw new Error("Method not implemented.");
+    return this.ModelItem.findByIdAndRemove(id);
   }
 }
 
