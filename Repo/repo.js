@@ -4,12 +4,20 @@ class baseRepo {
     this.ModelItem = _ModelItem;
   }
 
-  find(itemInfo) {
-    return this.ModelItem.findOne(itemInfo);
+  find() {
+    return this.ModelItem.find();
   }
 
   findOne(itemInfo) {
     return this.ModelItem.findOne(itemInfo);
+  }
+
+  findPopulate(tag) {
+    return this.ModelItem.find().populate(tag);
+  }
+
+  findOnePopulate(itemInfo, tag) {
+    return this.ModelItem.findOne(itemInfo).populate(tag);
   }
 
   create(item) {
@@ -18,7 +26,6 @@ class baseRepo {
   }
 
   update(id, newItem) {
-    console.log(id, newItem);
     const foundItem = this.ModelItem.findOneAndUpdate(id, newItem, {
       new: true,
     });

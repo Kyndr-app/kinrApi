@@ -1,27 +1,25 @@
-const db = require("moongose");
-const dbUrl = `mongodb+srv://${process.env.USER_DB}:${process.env.PWD_USER_DB}@kyndr.04qiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const baseRepo = require("../../Repo/repo");
+const model = require("./schema");
+class SupporterDomain {
+  supporterRepo = new baseRepo(model);
 
-db.Promise = global.Promise;
+  listSupporters() {
+    return this.supporterRepo.findPopulate("user");
+  }
 
-db.connect(dbUrl, {
-  useNewUrlParser: true,
-});
+  addSupporter(supporter) {
+    return this.supporterRepo.create(supporter);
+  }
 
-console.log("succesfull db connection");
-
-const { listenerCount } = require("./schema");
-
-const supporterList = [];
-
-function addSupporter(supporter) {
-  list.push(supporter);
+  updateSupporter(id, newsupporter) {
+    return this.supporterRepo.update(id, newsupporter);
+  }
+  findOneSupporter(supporterInfo) {
+    return this.supporterRepo.findOnePopulate(supporterInfo, "user");
+  }
+  deleteSupporter(id) {
+    return this.supporterRepo.delete(id);
+  }
 }
 
-function getSupporters() {
-  return supportersList;
-}
-
-module.exports = {
-  add: addSupporter,
-  list: getSupporters,
-};
+module.exports = SupporterDomain;

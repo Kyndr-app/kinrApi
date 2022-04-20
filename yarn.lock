@@ -3058,9 +3058,9 @@
     "ms" "2.1.3"
     "sift" "16.0.0"
 
-"moongose@^1.0.0":
+"mongoose@^1.0.0":
   "integrity" "sha512-GfWtcLw8wuGal1ezPbQ/1nZGypkZM4CVdrNFKnFy45bq+Wf2I2ajMnOAopdv6k1PSOiivMVzsMJHLxSuSBySnA=="
-  "resolved" "https://registry.npmjs.org/moongose/-/moongose-1.0.0.tgz"
+  "resolved" "https://registry.npmjs.org/mongoose/-/mongoose-1.0.0.tgz"
   "version" "1.0.0"
   dependencies:
     "aws-sdk" "^2.1029.0"

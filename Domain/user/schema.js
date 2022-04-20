@@ -1,11 +1,21 @@
-const moongose = require("mongoose");
+const mongoose = require("mongoose");
 
-const Schema = moongose.Schema;
+const Schema = mongoose.Schema;
 
 const mySchema = new Schema({
-  name: String,
+  email: String,
+  user_name: String,
+  password: String,
+  phone_number: String,
+  first_name: String,
+  last_name: String,
+  pan_id: String,
+  wallet_addres: String,
+  wallet_private_key: String,
+  profile_img: String, //a reference to an s3 instance
+  upi_id: String,
 });
 
-const model = moongose.model("User", mySchema);
+const model = mongoose.model("User", mySchema);
 
 module.exports = model;

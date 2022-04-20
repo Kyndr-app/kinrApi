@@ -9,5 +9,5 @@ const mySchema = new Schema({
   },
 });
 
-const model = mongoose.model("Supporter", mySchema);
+const model = mongoose.model("Beneficiary", mySchema);
 module.exports = model;
