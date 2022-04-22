@@ -15,12 +15,16 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:user_name", async (req, res) => {
   try {
-    const user = await kyndrService.findOneSupporter({ _id: req.params.id });
+    const user = await kyndrService.findOneSupporter({
+      user_name: req.params.user_name,
+    });
+
+    console.log(user)
     response.success(req, res, user, 201);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     response.error(req, res, "Invalid information", 400, "Error", error);
   }
 });
@@ -30,27 +34,40 @@ router.post("/", async (req, res) => {
     const newUser = await kyndrService.addUser(req.body.user);
 
     const newSupporter = await kyndrService.addSupporter({ user: newUser._id });
-    response.success(req, res, newSupporter, 201);
+    response.success(
+      req,
+      res,
+      await kyndrService.findOneSupporter({ user: newSupporter.user }),
+      201
+    );
   } catch (error) {
+    console.log(error);
     response.error(req, res, "Invalid information", 400, "Error", error);
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:user_name", async (req, res) => {
   try {
-    const supporter = await kyndrService.findOneSupporter({ _id: req.params.id });
-    const newUser = await kyndrService.updateUser(supporter.user, req.body.user);
+    const supporter = await kyndrService.findOneSupporter({
+      user_name: req.params.user_name,
+    });
+    const newUser = await kyndrService.updateUser(
+      supporter.user,
+      req.body.user
+    );
     response.success(req, res, newUser, 201);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     response.error(req, res, "Invalid information", 400, "Error", error);
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:user_name", async (req, res) => {
   try {
-    const supporter = await kyndrService.deleteSupporter(req.params.id);
-    const user = await kyndrService.deleteUser(supporter.user);
+    const supporter = await kyndrService.deleteSupporter({
+      user_name: req.params.user_name,
+    });
+    const user = await kyndrService.deleteUser({ user: supporter.user });
     response.success(req, res, { supporter, user }, 201);
   } catch (error) {
     response.error(req, res, "Invalid information", 400, "Error", error);

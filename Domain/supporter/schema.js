@@ -9,5 +9,6 @@ const mySchema = new Schema({
   },
 });
 
+
 const model = mongoose.model("Supporter", mySchema);
 module.exports = model;

@@ -4,7 +4,9 @@ require("dotenv").config();
 const router = require("./Routes/index");
 
 const db = require("mongoose");
-const dbUrl = `mongodb+srv://${process.env.USER_DB}:${process.env.PWD_USER_DB}@kyndr.04qiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const dbUrl = `mongodb+srv://${process.env.USER_DB}:${process.env.PWD_USER_DB}@kyndrtest.04qiy.mongodb.net/test`;
+
+
 const app = express();
 const port = process.env.PORT || 5000;
 

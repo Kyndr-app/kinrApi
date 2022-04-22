@@ -1,24 +1,29 @@
 const baseRepo = require("../../Repo/repo");
 const model = require("./schema");
+const UserDomain = require("../user/index")
+const selection = "-_id";
+const hide = { _id: 0 };
+const path = "user";
 class SupporterDomain {
+  userDomain = new UserDomain()
   supporterRepo = new baseRepo(model);
 
   listSupporters() {
-    return this.supporterRepo.findPopulate("user");
+    return this.supporterRepo.find(hide).populate(path, selection);
   }
 
   addSupporter(supporter) {
     return this.supporterRepo.create(supporter);
   }
 
-  updateSupporter(id, newsupporter) {
-    return this.supporterRepo.update(id, newsupporter);
+  updateSupporter(filter, newsupporter) {
+    return this.supporterRepo.update(filter, newsupporter);
   }
-  findOneSupporter(supporterInfo) {
-    return this.supporterRepo.findOnePopulate(supporterInfo, "user");
+  findOneSupporter(filter) {
+    return this.userDomain.findOneUser(filter, hide)
   }
-  deleteSupporter(id) {
-    return this.supporterRepo.delete(id);
+  deleteSupporter(filter) {
+    return this.supporterRepo.delete(filter);
   }
 }
 

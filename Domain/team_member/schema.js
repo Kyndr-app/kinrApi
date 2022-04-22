@@ -20,7 +20,9 @@ const mySchema = new Schema({
     enum: ["active", "inactive"],
     default: "active",
   },
+  
 });
+
 
 const model = mongoose.model("TeamMember", mySchema);
 module.exports = model;

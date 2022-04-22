@@ -1,10 +1,13 @@
 const baseRepo = require("../../Repo/repo");
 const model = require("./schema");
+
+
+const hide = { _id: 0 };
 class UserDomain {
   userRepo = new baseRepo(model);
 
-  listUsers(user) {
-    return this.userRepo.find(user);
+  listUsers() {
+    return this.userRepo.find(hide);
   }
 
   addUser(user) {

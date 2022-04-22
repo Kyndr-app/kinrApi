@@ -4,20 +4,12 @@ class baseRepo {
     this.ModelItem = _ModelItem;
   }
 
-  find() {
-    return this.ModelItem.find();
+  find(select) {
+    return this.ModelItem.find({}, select);
   }
 
-  findOne(itemInfo) {
-    return this.ModelItem.findOne(itemInfo);
-  }
-
-  findPopulate(tag) {
-    return this.ModelItem.find().populate(tag);
-  }
-
-  findOnePopulate(itemInfo, tag) {
-    return this.ModelItem.findOne(itemInfo).populate(tag);
+  findOne(filter, select) {
+    return this.ModelItem.findOne(filter, select);
   }
 
   create(item) {
@@ -25,16 +17,16 @@ class baseRepo {
     return myItem.save();
   }
 
-  update(id, newItem) {
-    const foundItem = this.ModelItem.findOneAndUpdate(id, newItem, {
+  update(filter, newItem) {
+    return this.ModelItem.findOneAndUpdate(filter, newItem, {
       new: true,
     });
-    return foundItem;
   }
 
-  delete(id) {
-    return this.ModelItem.findByIdAndRemove(id);
+  delete(filter) {
+    return this.ModelItem.findOneAndDelete(filter);
   }
 }
 
 module.exports = baseRepo;
+  

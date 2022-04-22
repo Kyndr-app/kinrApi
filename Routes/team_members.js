@@ -15,9 +15,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:user_name", async (req, res) => {
   try {
-    const user = await kyndrService.findOneTeamMember({ _id: req.params.id });
+    const user = await kyndrService.findOneTeamMember({
+      user_name: req.params.user_name,
+    });
     response.success(req, res, user, 201);
   } catch (error) {
     console.log(error);
@@ -38,7 +40,7 @@ router.post("/", async (req, res) => {
     response.success(
       req,
       res,
-      await kyndrService.findOneTeamMember({ _id: newteamMember._id }),
+      await kyndrService.findOneTeamMember({ _id: newteamMember.user }),
       201
     );
   } catch (error) {
@@ -47,31 +49,26 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:user_name", async (req, res) => {
   try {
     const teamMember = await kyndrService.findOneTeamMember({
-      _id: req.params.id,
+      user_name: req.params.user_name,
     });
     const newUser = await kyndrService.updateTeamMember(
       teamMember.user,
       req.body.user
     );
 
-    response.success(
-      req,
-      res,
-      await kyndrService.findOneTeamMember({ _id: newUser._id }),
-      201
-    );
+    response.success(req, res, newUser, 201);
   } catch (error) {
     console.log(error);
     response.error(req, res, "Invalid information", 400, "Error", error);
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:user_name", async (req, res) => {
   try {
-    const teamMember = await kyndrService.deleteTeamMember(req.params.id);
+    const teamMember = await kyndrService.deleteTeamMember({user_name: req.params.user_name,});
     const user = await kyndrService.deleteUser(teamMember.user);
     response.success(req, res, { teamMember, user }, 201);
   } catch (error) {

@@ -23,33 +23,12 @@ class KyndrService {
     return await userDomain.addUser(user);
   }
 
-  async updateUser(id, newUser) {
-    return await userDomain.updateUser(id, newUser);
+  async updateUser(filter, newUser) {
+    return await userDomain.updateUser(filter, newUser);
   }
 
-  async deleteUser(id) {
-    return await userDomain.deleteUser(id);
-  }
-
-  // Supporters
-  async listSupporters() {
-    return await supporterDomain.listSupporters();
-  }
-
-  async findOneSupporter(supporterInfo) {
-    return await supporterDomain.findOneSupporter(supporterInfo);
-  }
-
-  async addSupporter(supporter) {
-    return await supporterDomain.addSupporter(supporter);
-  }
-
-  async updateSupporter(id, newSupporter) {
-    return await supporterDomain.updateSupporter(id, newSupporter);
-  }
-
-  async deleteSupporter(id) {
-    return await supporterDomain.deleteSupporter(id);
+  async deleteUser(filter) {
+    return await userDomain.deleteUser(filter);
   }
 
   // Beneficiaries
@@ -58,23 +37,43 @@ class KyndrService {
     return await beneficiaryDomain.listBeneficiaries();
   }
 
-  async findOneBeneficiary(beneficiaryInfo) {
-    return await beneficiaryDomain.findOneBeneficiary(beneficiaryInfo);
+  async findOneBeneficiary(filter) {
+    return await beneficiaryDomain.findOneBeneficiary(filter);
   }
 
   async addBeneficiary(beneficiary) {
     return await beneficiaryDomain.addBeneficiary(beneficiary);
   }
 
-  async updateBeneficiary(id, newBeneficiary) {
-    return await beneficiaryDomain.updateBeneficiary(id, newBeneficiary);
+  async updateBeneficiary(filter, newBeneficiary) {
+    return await beneficiaryDomain.updateBeneficiary(filter, newBeneficiary);
   }
 
-  async deleteBeneficiary(id) {
-    return await beneficiaryDomain.deleteBeneficiary(id);
+  async deleteBeneficiary(filter) {
+    return await beneficiaryDomain.deleteBeneficiary(filter);
   }
 
-  
+  // Supporters
+  async listSupporters() {
+    return await supporterDomain.listSupporters();
+  }
+
+  async findOneSupporter(filter) {
+    return await supporterDomain.findOneSupporter(filter);
+  }
+
+  async addSupporter(supporter) {
+    return await supporterDomain.addSupporter(supporter);
+  }
+
+  async updateSupporter(filter, newSupporter) {
+    return await supporterDomain.updateSupporter(filter, newSupporter);
+  }
+
+  async deleteSupporter(filter) {
+    return await supporterDomain.deleteSupporter(filter);
+  }
+
   // TeamMembers
 
   async listTeamMembers() {
@@ -89,12 +88,12 @@ class KyndrService {
     return await teamMemberDomain.addTeamMember(team_member);
   }
 
-  async updateTeamMember(id, newTeam_member) {
-    return await teamMemberDomain.updateTeamMember(id, newTeam_member);
+  async updateTeamMember(filter, newTeam_member) {
+    return await teamMemberDomain.updateTeamMember(filter, newTeam_member);
   }
 
-  async deleteTeamMember(id) {
-    return await teamMemberDomain.deleteTeamMember(id);
+  async deleteTeamMember(filter) {
+    return await teamMemberDomain.deleteTeamMember(filter);
   }
 }
 
