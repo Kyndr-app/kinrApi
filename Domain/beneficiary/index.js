@@ -13,21 +13,30 @@ class BeneficiaryDomain {
   }
 
   async findOneBeneficiary(filter) {
-    return this.userDomain.findOneUser(filter, hide);
+    const user = await this.userDomain.findOneUser(filter);
+    return this.beneficiaryRepo
+      .findOne({ user: user._id }, hide)
+      .populate(path, selection);
   }
 
   addBeneficiary(beneficiary) {
     return this.beneficiaryRepo.create(beneficiary);
   }
 
-  updateBeneficiary(filter, newbeneficiary) {
-    return this.beneficiaryRepo.update(filter, newbeneficiary);
+  async updateBeneficiary(filter, newBeneficiary) {
+    const beneficiary = await this.findOneBeneficiary(filter);
+    return this.userDomain.updateUser(
+      { user: beneficiary.user.toString() },
+      newBeneficiary
+    );
   }
 
   async deleteBeneficiary(filter) {
     const user = await this.userDomain.findOneUser(filter);
-    console.log(user);
-    return this.beneficiaryRepo.delete({ user: user._id });
+    return this.beneficiaryRepo.delete(
+      { user: user._id },
+      { projection: { ...hide, user: 0 } }
+    );
   }
 }
 

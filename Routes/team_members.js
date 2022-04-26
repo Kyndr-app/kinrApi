@@ -51,15 +51,12 @@ router.post("/", async (req, res) => {
 
 router.patch("/:user_name", async (req, res) => {
   try {
-    const teamMember = await kyndrService.findOneTeamMember({
-      user_name: req.params.user_name,
-    });
-    const newUser = await kyndrService.updateTeamMember(
-      teamMember.user,
-      req.body.user
+    const newTeamMember = await kyndrService.updateTeamMember(
+      { user_name: req.params.user_name },
+      req.body
     );
 
-    response.success(req, res, newUser, 201);
+    response.success(req, res, newTeamMember, 201);
   } catch (error) {
     console.log(error);
     response.error(req, res, "Invalid information", 400, "Error", error);
@@ -68,7 +65,9 @@ router.patch("/:user_name", async (req, res) => {
 
 router.delete("/:user_name", async (req, res) => {
   try {
-    const teamMember = await kyndrService.deleteTeamMember({user_name: req.params.user_name,});
+    const teamMember = await kyndrService.deleteTeamMember({
+      user_name: req.params.user_name,
+    });
     const user = await kyndrService.deleteUser(teamMember.user);
     response.success(req, res, { teamMember, user }, 201);
   } catch (error) {

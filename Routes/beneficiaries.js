@@ -17,7 +17,9 @@ router.get("/", async (req, res) => {
 
 router.get("/:user_name", async (req, res) => {
   try {
-    const user = await kyndrService.findOneBeneficiary({ user_name: req.params.user_name });
+    const user = await kyndrService.findOneBeneficiary({
+      user_name: req.params.user_name,
+    });
     response.success(req, res, user, 201);
   } catch (error) {
     console.log(error);
@@ -46,13 +48,14 @@ router.post("/", async (req, res) => {
 
 router.patch("/:user_name", async (req, res) => {
   try {
-    const beneficiary = await kyndrService.findOneBeneficiary({
-      user_name: req.params.user_name 
-    });
-    const newUser = await kyndrService.updateUser(
-      beneficiary.user,
+
+    const newUser = await kyndrService.updateBeneficiary(
+      {user_name: req.params.user_name},
       req.body.user
     );
+
+    console.log(newUser);
+
     response.success(req, res, newUser, 201);
   } catch (error) {
     console.log(error);
@@ -62,7 +65,9 @@ router.patch("/:user_name", async (req, res) => {
 
 router.delete("/:user_name", async (req, res) => {
   try {
-    const beneficiary = await kyndrService.deleteBeneficiary({user_name: req.params.user_name,});
+    const beneficiary = await kyndrService.deleteBeneficiary({
+      user_name: req.params.user_name,
+    });
     const user = await kyndrService.deleteUser(beneficiary.user);
     response.success(req, res, { beneficiary, user }, 201);
   } catch (error) {

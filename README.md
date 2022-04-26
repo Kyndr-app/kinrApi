@@ -26,3 +26,6 @@ This is what the server is expectig in the body request when a user is going to 
 ### Supporter
  
  When you create a supporter you must follow the Use Structure in the request.
+
+
+## endpoints 

@@ -7,6 +7,8 @@ const db = require("mongoose");
 const dbUrl = `mongodb+srv://${process.env.USER_DB}:${process.env.PWD_USER_DB}@kyndrtest.04qiy.mongodb.net/test`;
 
 
+
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -23,6 +25,7 @@ db.Promise = global.Promise;
 
 db.connect(dbUrl, {
   useNewUrlParser: true,
+  autoIndex: true,
 });
 
 app.listen(port, "0.0.0.0", () => {

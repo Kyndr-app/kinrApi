@@ -17,16 +17,16 @@ class baseRepo {
     return myItem.save();
   }
 
-  update(filter, newItem) {
+   update(filter, newItem) {
     return this.ModelItem.findOneAndUpdate(filter, newItem, {
       new: true,
+      fields: { _id: 0 },
     });
   }
 
-  delete(filter) {
-    return this.ModelItem.findOneAndDelete(filter);
+  delete(filter, options) {
+    return this.ModelItem.findOneAndDelete(filter, options);
   }
 }
 
 module.exports = baseRepo;
-  

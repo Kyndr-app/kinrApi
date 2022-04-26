@@ -1,28 +1,45 @@
 const baseRepo = require("../../Repo/repo");
 const model = require("./schema");
-const UserDomain = require("../user/index")
+const UserDomain = require("../user/index");
 const selection = "-_id";
 const hide = { _id: 0 };
 const path = "user";
 class TeamMemberDomain {
   teamMemberRepo = new baseRepo(model);
-  userDomain = new UserDomain()
+  userDomain = new UserDomain();
   listTeamMembers() {
-    return this.teamMemberRepo.find(hide).populate(path, selection)
+    return this.teamMemberRepo.find(hide).populate(path, selection);
   }
-  findOneTeamMember(filter) {
-    return this.userDomain.findOneUser(filter, hide)
+  async findOneTeamMember(filter) {
+    const user = await this.userDomain.findOneUser(filter);
+    return this.teamMemberRepo
+      .findOne({ user: user._id }, hide)
+      .populate(path, selection);
   }
   addTeamMember(teamMember) {
     return this.teamMemberRepo.create(teamMember);
   }
 
-  updateTeamMember(id, newTeamMember) {
-    return this.teamMemberRepo.update(id, newTeamMember);
+  async updateTeamMember(filter, newTeamMember) {
+    const team_member = await this.findOneTeamMember(filter);
+    console.log(team_member);
+
+    return this.teamMemberRepo
+      .update({ user: team_member.user.toString() }, newTeamMember.team_member)
+      .then(() => {
+        this.userDomain.updateUser(
+          { user: team_member.user.toString() },
+          newTeamMember.user
+        );
+      });
   }
 
-  deleteTeamMember(id) {
-    return this.teamMemberRepo.delete(id);
+  async deleteTeamMember(filter) {
+    const user = await this.userDomain.findOneUser(filter);
+    return this.teamMemberRepo.delete(
+      { user: user._id },
+      { projection: { ...hide, user: 0 } }
+    );
   }
 }
 

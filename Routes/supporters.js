@@ -21,7 +21,6 @@ router.get("/:user_name", async (req, res) => {
       user_name: req.params.user_name,
     });
 
-    console.log(user)
     response.success(req, res, user, 201);
   } catch (error) {
     console.log(error);
@@ -37,7 +36,7 @@ router.post("/", async (req, res) => {
     response.success(
       req,
       res,
-      await kyndrService.findOneSupporter({ user: newSupporter.user }),
+      await kyndrService.findOneSupporter({ _id: newSupporter.user }),
       201
     );
   } catch (error) {
@@ -48,11 +47,8 @@ router.post("/", async (req, res) => {
 
 router.patch("/:user_name", async (req, res) => {
   try {
-    const supporter = await kyndrService.findOneSupporter({
-      user_name: req.params.user_name,
-    });
-    const newUser = await kyndrService.updateUser(
-      supporter.user,
+    const newUser = await kyndrService.updateSupporter(
+      {user_name: req.params.user_name},
       req.body.user
     );
     response.success(req, res, newUser, 201);

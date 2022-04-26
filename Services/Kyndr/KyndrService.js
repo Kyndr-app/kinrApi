@@ -95,6 +95,7 @@ class KyndrService {
   async deleteTeamMember(filter) {
     return await teamMemberDomain.deleteTeamMember(filter);
   }
+
 }
 
 module.exports = KyndrService;

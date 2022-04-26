@@ -1,8 +1,8 @@
 const baseRepo = require("../../Repo/repo");
 const model = require("./schema");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
-
-const hide = { _id: 0 };
 class UserDomain {
   userRepo = new baseRepo(model);
 
@@ -10,18 +10,19 @@ class UserDomain {
     return this.userRepo.find(hide);
   }
 
-  addUser(user) {
+  async addUser(user) {
+    user.password = await bcrypt.hash(user.password, saltRounds);
     return this.userRepo.create(user);
   }
 
-  updateUser(id, newUser) {
-    return this.userRepo.update(id, newUser);
+  updateUser(filter, newUser, options) {
+    return this.userRepo.update(filter, newUser, options);
   }
-  findOneUser(userInfo) {
-    return this.userRepo.findOne(userInfo);
+  findOneUser(userInfo, hide) {
+    return this.userRepo.findOne(userInfo, hide);
   }
   deleteUser(id) {
-    return this.userRepo.delete(id);
+    return this.userRepo.delete(id, { projection: { _id: 0 } });
   }
 }
 
