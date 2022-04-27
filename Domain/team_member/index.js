@@ -21,17 +21,20 @@ class TeamMemberDomain {
   }
 
   async updateTeamMember(filter, newTeamMember) {
-    const team_member = await this.findOneTeamMember(filter);
-    console.log(team_member);
+    const user = await this.userDomain.findOneUser(filter);
+    const team_member = await this.teamMemberRepo
+      .findOne({ user: user._id }, hide)
+      .populate(path);
 
-    return this.teamMemberRepo
-      .update({ user: team_member.user.toString() }, newTeamMember.team_member)
-      .then(() => {
-        this.userDomain.updateUser(
-          { user: team_member.user.toString() },
-          newTeamMember.user
-        );
-      });
+      this.userDomain.updateUser(
+        { user: team_member.user._id },
+        newTeamMember.user
+      );
+
+    return this.teamMemberRepo.update(
+      { user: team_member.user._id },
+      newTeamMember.team_member
+    );
   }
 
   async deleteTeamMember(filter) {

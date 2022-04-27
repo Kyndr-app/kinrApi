@@ -17,11 +17,16 @@ class baseRepo {
     return myItem.save();
   }
 
-   update(filter, newItem) {
-    return this.ModelItem.findOneAndUpdate(filter, newItem, {
-      new: true,
-      fields: { _id: 0 },
-    });
+  update(filter, newItem, options, callback) {
+    return this.ModelItem.findOneAndUpdate(
+      filter,
+      newItem,
+      {
+        new: true,
+        fields: { _id: 0 },
+      },
+      callback
+    );
   }
 
   delete(filter, options) {
