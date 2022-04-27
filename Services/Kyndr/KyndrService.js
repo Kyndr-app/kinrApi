@@ -88,8 +88,8 @@ class KyndrService {
     return await teamMemberDomain.addTeamMember(team_member);
   }
 
-  async updateTeamMember(filter, newTeam_member) {
-    return await teamMemberDomain.updateTeamMember(filter, newTeam_member);
+   updateTeamMember(filter, newTeam_member) {
+    return  teamMemberDomain.updateTeamMember(filter, newTeam_member);
   }
 
   async deleteTeamMember(filter) {

@@ -26,15 +26,16 @@ class TeamMemberDomain {
       .findOne({ user: user._id }, hide)
       .populate(path);
 
-      this.userDomain.updateUser(
-        { user: team_member.user._id },
-        newTeamMember.user
-      );
-
-    return this.teamMemberRepo.update(
+    await this.userDomain.updateUser(
       { user: team_member.user._id },
-      newTeamMember.team_member
+      newTeamMember.user
     );
+
+    const newTM = await this.teamMemberRepo
+      .update({ user: team_member.user._id }, newTeamMember.team_member)
+      .populate(path, hide);
+
+    return { newTM };
   }
 
   async deleteTeamMember(filter) {
