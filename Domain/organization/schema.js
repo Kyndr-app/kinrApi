@@ -4,15 +4,16 @@ const Schema = mongoose.Schema;
 
 const mySchema = new Schema({
   name: {
-      type: String
+      type: String,
+      unique: true
   },
   team_members: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "TeamMember",
   }],
-  campaigns: [{
+  campaings: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Campaign",
+    ref: "Campaing",
   }],
 });
 

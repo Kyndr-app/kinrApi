@@ -3,10 +3,15 @@ const SupporterDomain = require("../../Domain/supporter/index");
 const BeneficiaryDomain = require("../../Domain/beneficiary/index");
 const TeamMemberDomain = require("../../Domain/team_member/index");
 
+const OrganizationDomain = require("../../Domain/organization/index");
+
 const userDomain = new UserDomain();
 const supporterDomain = new SupporterDomain();
 const beneficiaryDomain = new BeneficiaryDomain();
 const teamMemberDomain = new TeamMemberDomain();
+
+
+const organizationDomain = new OrganizationDomain();
 
 class KyndrService {
   constructor() {}
@@ -94,6 +99,51 @@ class KyndrService {
 
   async deleteTeamMember(filter) {
     return await teamMemberDomain.deleteTeamMember(filter);
+  }
+
+  //Organization
+
+  async listOrganizations() {
+    return await organizationDomain.listOrganizations();
+  }
+
+  async findOneOrganization(organization) {
+    return await organizationDomain.findOneOrganization(organization);
+  }
+
+  async addOrganization(organization) {
+    return await organizationDomain.addOrganization(organization);
+  }
+
+  async updateOrganization(filter, newOrganization) {
+    return  await organizationDomain.updateOrganization(filter, newOrganization);
+  }
+
+  async deleteOrganization(filter) {
+    return await organizationDomain.deleteOrganization(filter);
+  }
+
+
+  // campaing
+
+  async listCampaings(organization) {
+    return await organizationDomain.listOrganizationCampaings(organization);
+  }
+
+  async findOneCampaing(organization) {
+    return await organizationDomain.findOneOrganizationCampaing(organization);
+  }
+
+  async addCampaing(campaing, newCampaing) {
+    return await organizationDomain.addCampaing(campaing, newCampaing);
+  }
+
+  async updateCampaing(organization, campaing, newCampaing, ) {
+    return  await organizationDomain.updateCampaing(organization, campaing,  newCampaing);
+  }
+
+  async deleteCampaing(organization, campaing) {
+    return await organizationDomain.deleteCampaing(organization, campaing);
   }
 
 }

@@ -18,13 +18,12 @@ class baseRepo {
   }
 
   update(filter, newItem, options, callback) {
+    options.new = true;
+    options.fields = { _id: 0 }
     return this.ModelItem.findOneAndUpdate(
       filter,
       newItem,
-      {
-        new: true,
-        fields: { _id: 0 },
-      },
+      options,
       callback
     );
   }

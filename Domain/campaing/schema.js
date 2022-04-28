@@ -5,12 +5,13 @@ const Schema = mongoose.Schema;
 const mySchema = new Schema({
   title: {
     type: String,
+    unique: true
   },
   location: {
     type: String,
   },
   raise_goal: {
-    type: int,
+    type: Number,
   },
 
   profile_image: {
@@ -27,7 +28,11 @@ const mySchema = new Schema({
   story: {
     type: String,
   },
+  organization: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Organization",
+  },
 });
 
-const model = mongoose.model("Organization", mySchema);
+const model = mongoose.model("Campaing", mySchema);
 module.exports = model;
