@@ -5,11 +5,13 @@ const TeamMemberDomain = require("../../Domain/team_member/index");
 
 const OrganizationDomain = require("../../Domain/organization/index");
 
+const DonationDomain = require("../../Domain/donation/index");
+
 const userDomain = new UserDomain();
 const supporterDomain = new SupporterDomain();
 const beneficiaryDomain = new BeneficiaryDomain();
 const teamMemberDomain = new TeamMemberDomain();
-
+const DonationDomain = new DonationDomain();
 
 const organizationDomain = new OrganizationDomain();
 
@@ -93,8 +95,8 @@ class KyndrService {
     return await teamMemberDomain.addTeamMember(team_member);
   }
 
-   updateTeamMember(filter, newTeam_member) {
-    return  teamMemberDomain.updateTeamMember(filter, newTeam_member);
+  updateTeamMember(filter, newTeam_member) {
+    return teamMemberDomain.updateTeamMember(filter, newTeam_member);
   }
 
   async deleteTeamMember(filter) {
@@ -116,13 +118,12 @@ class KyndrService {
   }
 
   async updateOrganization(filter, newOrganization) {
-    return  await organizationDomain.updateOrganization(filter, newOrganization);
+    return await organizationDomain.updateOrganization(filter, newOrganization);
   }
 
   async deleteOrganization(filter) {
     return await organizationDomain.deleteOrganization(filter);
   }
-
 
   // campaing
 
@@ -138,14 +139,21 @@ class KyndrService {
     return await organizationDomain.addCampaing(campaing, newCampaing);
   }
 
-  async updateCampaing(organization, campaing, newCampaing, ) {
-    return  await organizationDomain.updateCampaing(organization, campaing,  newCampaing);
+  async updateCampaing(organization, campaing, newCampaing) {
+    return await organizationDomain.updateCampaing(
+      organization,
+      campaing,
+      newCampaing
+    );
   }
 
   async deleteCampaing(organization, campaing) {
     return await organizationDomain.deleteCampaing(organization, campaing);
   }
 
+  async createDonation(donation) {
+    return await DonationDomain.createDonation(donation)
+  }
 }
 
 module.exports = KyndrService;

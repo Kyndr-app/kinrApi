@@ -7,6 +7,10 @@ const mySchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  donations: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Donation",
+  }],
 });
 
 

@@ -32,6 +32,11 @@ const mySchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Organization",
   },
+
+  donations: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Donation",
+  }],
 });
 
 const model = mongoose.model("Campaing", mySchema);
