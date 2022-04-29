@@ -19,7 +19,7 @@ const mySchema = new Schema({
   date: {
     type: Date,
   },
-  campaings: {
+  campaing: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Campaing",
   },
