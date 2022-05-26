@@ -27,20 +27,25 @@ class DonationDomain {
 
   addDonation(item, campaingFilter, supporterFilter) {
 
+
+
+    const campaing = await this.campaingDomain.findOneCampaing(campaingFilter);
+    const supporter = await this.supporterDomain.findOneSupporter(supporterFilter);
+    item.campaing = campaing._id;
+    item.supoporter = supporter._id;
     const donation = await this.donationRepo
     .create(item)
     .populate("campaing", hide)
     .populate("supporter", hide);
 
-    const campaing = await this.campaingDomain.findOneCampaing(campaingFilter);
-    await this.campaingDomain.updateCampaing({_id: campaing._id }, {
+    await this.campaingDomain.updateCampaing({_id:  item.campaing  }, {
       $push: {
         donations: donation,
       },
       
     }, { upsert: true }).populate("donations", hide);
 
-    const supporter = await this.supporterDomain.findOneSupporter(supporterFilter);
+
     await this.supporterDomain.updateSupporter({_id: supporter._id }, {
       $push: {
         donations: donation,
