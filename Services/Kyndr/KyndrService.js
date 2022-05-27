@@ -11,9 +11,10 @@ const userDomain = new UserDomain();
 const supporterDomain = new SupporterDomain();
 const beneficiaryDomain = new BeneficiaryDomain();
 const teamMemberDomain = new TeamMemberDomain();
-const DonationDomain = new DonationDomain();
-
 const organizationDomain = new OrganizationDomain();
+
+const donationDomain = new DonationDomain();
+
 
 class KyndrService {
   constructor() {}

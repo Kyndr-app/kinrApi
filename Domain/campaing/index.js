@@ -11,8 +11,8 @@ class CampaingDomain {
     return this.campaingRepo.find();
   }
 
-  findOneCampaing(item) {
-    return this.campaingRepo.findOne(item);
+  findOneCampaing(item, hide) {
+    return this.campaingRepo.findOne(item, hide);
   }
 
   addCampaing(item) {

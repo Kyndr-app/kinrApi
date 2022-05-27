@@ -17,15 +17,14 @@ class baseRepo {
     return myItem.save();
   }
 
-  update(filter, newItem, options, callback) {
+  update(filter, newItem, changes, callback) {
+    let options = {};
     options.new = true;
-    options.fields = { _id: 0 }
-    return this.ModelItem.findOneAndUpdate(
-      filter,
-      newItem,
-      options,
-      callback
-    );
+    options.fields = { _id: 0 };
+
+    if (changes) options = changes;
+
+    return this.ModelItem.findOneAndUpdate(filter, newItem, options, callback);
   }
 
   delete(filter, options) {

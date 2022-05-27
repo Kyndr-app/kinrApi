@@ -20,7 +20,7 @@ This is what the server is expectig in the body request when a user is going to 
 "profile_img": "www.google.com/image/2304", // s3 reference
 "upi_id": "success@razorpay",
 
-    }
+}
 
 }
 
@@ -92,6 +92,47 @@ Endpoints
     post ==>   /team_members
     patch ==>  /team_members/:user_name
     delete ==> /team_members/:user_name
+
+## Organtization
+
+{
+"name": "org11",
+
+    	"__v": 0
+    }
+
+## Campaigns
+
+{
+"donations": [],
+"title": "teleton2",
+"location": "managua",
+"raise_goal": 10,
+"profile_image": "sd",
+"baner_img": "ds",
+"supporting_img": [
+"sdds"
+],
+"story": "we are sick",
+"\_\_v": 0
+}
+
+### /Organization
+
+    get ==>    /organizations
+    get ==>    /organizations/:name
+    post ==>   /organizations
+    patch ==>  /organizations/:name 
+    
+     you can only update the name of an organization, to update a campaing or team member information linked to a organization use
+    the team member or campaing endpoint
+
+### /Campaings
+
+    get ==>    /team_members
+    get ==>    /team_members/:user_name
+    post ==>   /team_members
+    patch ==>  /team_members/:user_name
 
 ### /deposit
 

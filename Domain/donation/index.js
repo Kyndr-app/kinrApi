@@ -25,33 +25,41 @@ class DonationDomain {
       .populate("supporter", hide);
   }
 
-  addDonation(item, campaingFilter, supporterFilter) {
-
-
-
+  async addDonation(item, campaingFilter, supporterFilter) {
     const campaing = await this.campaingDomain.findOneCampaing(campaingFilter);
-    const supporter = await this.supporterDomain.findOneSupporter(supporterFilter);
+    const supporter = await this.supporterDomain.findOneSupporter(
+      supporterFilter
+    );
     item.campaing = campaing._id;
     item.supoporter = supporter._id;
     const donation = await this.donationRepo
-    .create(item)
-    .populate("campaing", hide)
-    .populate("supporter", hide);
+      .create(item)
+      .populate("campaing", hide)
+      .populate("supporter", hide);
 
-    await this.campaingDomain.updateCampaing({_id:  item.campaing  }, {
-      $push: {
-        donations: donation,
-      },
-      
-    }, { upsert: true }).populate("donations", hide);
+    await this.campaingDomain
+      .updateCampaing(
+        { _id: item.campaing },
+        {
+          $push: {
+            donations: donation,
+          },
+        },
+        { upsert: true }
+      )
+      .populate("donations", hide);
 
-
-    await this.supporterDomain.updateSupporter({_id: supporter._id }, {
-      $push: {
-        donations: donation,
-      },
-      
-    }, { upsert: true }).populate("donations", hide);
+    await this.supporterDomain
+      .updateSupporter(
+        { _id: supporter._id },
+        {
+          $push: {
+            donations: donation,
+          },
+        },
+        { upsert: true }
+      )
+      .populate("donations", hide);
 
     return donation;
   }
